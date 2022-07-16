@@ -1,30 +1,54 @@
-import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
+import * as Font from "expo-font";
+import { useState, useCallback, useEffect } from "react";
+// import AppLoading from "expo-app-loading";
+import * as SplashScreen from "expo-splash-screen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-
 import CustomDrawer from "./navigation/CustomDrawer";
+import { View } from "react-native";
 
 const Stack = createStackNavigator();
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-	let [fontsLoaded] = useFonts(customFont);
+	const [appIsReady, setAppIsReady] = useState(false);
 
-	if (!fontsLoaded) {
-		return <AppLoading />;
+	useEffect(() => {
+		async function prepare() {
+			try {
+				await Font.loadAsync(customFont);
+			} catch (e) {
+				console.warn(e);
+			} finally {
+				setAppIsReady(true);
+			}
+		}
+		prepare();
+	}, []);
+
+	const onLayoutRootView = useCallback(async () => {
+		if (appIsReady) {
+			await SplashScreen.hideAsync();
+		}
+	}, [appIsReady]);
+
+	if (!appIsReady) {
+		return null;
 	}
 
 	return (
-		<NavigationContainer>
-			<Stack.Navigator
-				screenOptions={{
-					headerShown: false,
-				}}
-				initialRouteName={"Home"}
-			>
-				<Stack.Screen name="Home" component={CustomDrawer} />
-			</Stack.Navigator>
-		</NavigationContainer>
+		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+			<NavigationContainer>
+				<Stack.Navigator
+					screenOptions={{
+						headerShown: false,
+					}}
+					initialRouteName={"Home"}
+				>
+					<Stack.Screen name="Home" component={CustomDrawer} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</View>
 	);
 }
 
