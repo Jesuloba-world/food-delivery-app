@@ -17,19 +17,20 @@ interface props {
 }
 
 const MainLayout: FC<props> = () => {
-	const isDrawerOpen = useDrawerStatus();
-	const progress = useSharedValue(0);
+	const progress = useDrawerProgress();
 
-	useEffect(() => {
-		if (isDrawerOpen === "open") {
-			progress.value = withTiming(0);
-		} else {
-			progress.value = withTiming(1);
+	const scale = Animated.interpolateNode(progress as Adaptable<number>, {
+		inputRange: [0, 1],
+		outputRange: [1, 0.8],
+	});
+
+	const borderRadius = Animated.interpolateNode(
+		progress as Adaptable<number>,
+		{
+			inputRange: [0, 1],
+			outputRange: [1, 26],
 		}
-	}, [isDrawerOpen]);
-
-	const scale = interpolate(progress.value, [0, 1], [1, 0.8]);
-	const borderRadius = interpolate(progress.value, [0, 1], [1, 26]);
+	);
 
 	const animatedStyle = {
 		borderRadius,
@@ -37,9 +38,9 @@ const MainLayout: FC<props> = () => {
 	};
 
 	return (
-		<View style={[styles.mainStyle, animatedStyle]}>
+		<Animated.View style={[styles.mainStyle, animatedStyle]}>
 			<Text>MainLayout</Text>
-		</View>
+		</Animated.View>
 	);
 };
 
