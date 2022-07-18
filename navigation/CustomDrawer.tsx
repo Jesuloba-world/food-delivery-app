@@ -1,14 +1,8 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { View } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { MainLayout } from "../screens";
-import {
-	COLORS,
-	FONTS,
-	SIZES,
-	constants,
-	icons,
-	dummyData,
-} from "../constants";
+import { COLORS } from "../constants";
 import { CustomDrawerContent } from "./CustomDrawerContent";
 
 const Drawer = createDrawerNavigator();
@@ -22,6 +16,7 @@ const CustomDrawer = () => {
 			}}
 		>
 			<Drawer.Navigator
+				useLegacyImplementation
 				screenOptions={{
 					drawerType: "slide",
 					overlayColor: "transparent",
@@ -34,6 +29,8 @@ const CustomDrawer = () => {
 					sceneContainerStyle: {
 						backgroundColor: "transparent",
 					},
+					headerShown: false,
+					swipeEdgeWidth: 500,
 				}}
 				initialRouteName="MainLayout"
 				drawerContent={(props) => {

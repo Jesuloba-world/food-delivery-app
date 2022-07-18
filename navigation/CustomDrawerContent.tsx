@@ -1,5 +1,8 @@
-import { FC } from "react";
-import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { FC, useEffect } from "react";
+import {
+	DrawerContentScrollView,
+	useDrawerProgress,
+} from "@react-navigation/drawer";
 import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/src/types";
 import { TouchableOpacity, View, Image, Text } from "react-native";
 import {
@@ -11,6 +14,7 @@ import {
 	SIZES,
 } from "../constants";
 import { CustomDrawerItem } from "./components";
+import Animated, { Adaptable, SharedValue } from "react-native-reanimated";
 
 interface props {
 	navigation: DrawerNavigationHelpers;
