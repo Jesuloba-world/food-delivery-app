@@ -13,11 +13,11 @@ export const TabSlice = createSlice({
 	name: "tab",
 	initialState,
 	reducers: {
-		selectTab: (state, action: PayloadAction<string>) => {
+		setSelectedTab: (state, action: PayloadAction<string>) => {
 			state.selectedTab = action.payload;
 		},
 	},
 });
 
-export const { selectTab } = TabSlice.actions;
+export const { setSelectedTab } = TabSlice.actions;
 export default TabSlice.reducer;

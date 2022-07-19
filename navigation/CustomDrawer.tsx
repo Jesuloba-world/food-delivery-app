@@ -4,10 +4,20 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { MainLayout } from "../screens";
 import { COLORS } from "../constants";
 import { CustomDrawerContent } from "./CustomDrawerContent";
+import { useAppDispatch, useAppSelector } from "../stores/hook";
+import { setSelectedTab } from "../stores/tab/tabSlice";
 
 const Drawer = createDrawerNavigator();
 
 const CustomDrawer = () => {
+	const selectedTab = useAppSelector((state) => state.tab.selectedTab);
+
+	const dispatch = useAppDispatch();
+
+	const selectTab = (selectedTab: string) => {
+		return dispatch(setSelectedTab(selectedTab));
+	};
+
 	return (
 		<View
 			style={{
@@ -35,7 +45,11 @@ const CustomDrawer = () => {
 				initialRouteName="MainLayout"
 				drawerContent={(props) => {
 					return (
-						<CustomDrawerContent navigation={props.navigation} />
+						<CustomDrawerContent
+							navigation={props.navigation}
+							selectedTab={selectedTab}
+							setSelectedTab={selectTab}
+						/>
 					);
 				}}
 			>

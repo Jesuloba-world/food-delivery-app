@@ -14,13 +14,18 @@ import {
 	SIZES,
 } from "../constants";
 import { CustomDrawerItem } from "./components";
-import Animated, { Adaptable, SharedValue } from "react-native-reanimated";
 
 interface props {
 	navigation: DrawerNavigationHelpers;
+	selectedTab: string;
+	setSelectedTab: (a: string) => any;
 }
 
-export const CustomDrawerContent: FC<props> = ({ navigation }) => {
+export const CustomDrawerContent: FC<props> = ({
+	navigation,
+	selectedTab,
+	setSelectedTab,
+}) => {
 	return (
 		<DrawerContentScrollView
 			scrollEnabled={true}
@@ -86,18 +91,40 @@ export const CustomDrawerContent: FC<props> = ({ navigation }) => {
 					<CustomDrawerItem
 						label={constants.screens.home}
 						icon={icons.home}
+						isFocused={selectedTab === constants.screens.home}
+						onPress={() => {
+							setSelectedTab(constants.screens.home);
+							navigation.navigate("MainLayout");
+						}}
 					/>
 					<CustomDrawerItem
 						label={constants.screens.my_wallet}
 						icon={icons.wallet}
+						isFocused={selectedTab === constants.screens.my_wallet}
+						onPress={() => {
+							setSelectedTab(constants.screens.my_wallet);
+							navigation.navigate("MainLayout");
+						}}
 					/>
 					<CustomDrawerItem
 						label={constants.screens.notification}
 						icon={icons.notification}
+						isFocused={
+							selectedTab === constants.screens.notification
+						}
+						onPress={() => {
+							setSelectedTab(constants.screens.notification);
+							navigation.navigate("MainLayout");
+						}}
 					/>
 					<CustomDrawerItem
 						label={constants.screens.favourite}
 						icon={icons.favourite}
+						isFocused={selectedTab === constants.screens.favourite}
+						onPress={() => {
+							setSelectedTab(constants.screens.favourite);
+							navigation.navigate("MainLayout");
+						}}
 					/>
 
 					{/* Line Divider */}
