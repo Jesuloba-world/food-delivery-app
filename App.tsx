@@ -1,11 +1,12 @@
 import * as Font from "expo-font";
 import { useState, useCallback, useEffect } from "react";
-// import AppLoading from "expo-app-loading";
 import * as SplashScreen from "expo-splash-screen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import CustomDrawer from "./navigation/CustomDrawer";
 import { View } from "react-native";
+import { Provider } from "react-redux";
+import { store } from "./stores/store";
 
 const Stack = createStackNavigator();
 SplashScreen.preventAutoHideAsync();
@@ -37,18 +38,20 @@ export default function App() {
 	}
 
 	return (
-		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-			<NavigationContainer>
-				<Stack.Navigator
-					screenOptions={{
-						headerShown: false,
-					}}
-					initialRouteName={"Home"}
-				>
-					<Stack.Screen name="Home" component={CustomDrawer} />
-				</Stack.Navigator>
-			</NavigationContainer>
-		</View>
+		<Provider store={store}>
+			<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+				<NavigationContainer>
+					<Stack.Navigator
+						screenOptions={{
+							headerShown: false,
+						}}
+						initialRouteName={"Home"}
+					>
+						<Stack.Screen name="Home" component={CustomDrawer} />
+					</Stack.Navigator>
+				</NavigationContainer>
+			</View>
+		</Provider>
 	);
 }
 

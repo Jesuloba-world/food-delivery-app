@@ -1,15 +1,8 @@
-import React, { FC, useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { FC } from "react";
+import { Text, StyleSheet } from "react-native";
 import { RouteProp, ParamListBase } from "@react-navigation/native";
-import { useDrawerProgress, useDrawerStatus } from "@react-navigation/drawer";
-import Animated, {
-	Adaptable,
-	interpolate,
-	Extrapolate,
-	useAnimatedStyle,
-	useSharedValue,
-	withTiming,
-} from "react-native-reanimated";
+import { useDrawerProgress } from "@react-navigation/drawer";
+import Animated, { Adaptable } from "react-native-reanimated";
 
 interface props {
 	route: RouteProp<ParamListBase, "MainLayout">;
