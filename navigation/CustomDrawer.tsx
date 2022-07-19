@@ -40,7 +40,7 @@ const CustomDrawer = () => {
 						backgroundColor: "transparent",
 					},
 					headerShown: false,
-					swipeEdgeWidth: 500,
+					swipeEdgeWidth: 100,
 				}}
 				initialRouteName="MainLayout"
 				drawerContent={(props) => {
