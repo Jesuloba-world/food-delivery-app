@@ -3,7 +3,6 @@ import {
 	Text,
 	StyleSheet,
 	TouchableOpacity,
-	TouchableWithoutFeedback,
 	Image,
 	FlatList,
 	View,
@@ -27,7 +26,8 @@ import {
 	dummyData,
 	icons,
 } from "../constants";
-import { Header } from "../components";
+import { Header, TabButton } from "../components";
+import { Shadow } from "react-native-shadow-2";
 
 interface props {
 	route: RouteProp<ParamListBase, "MainLayout">;
@@ -68,7 +68,16 @@ const MainLayout: FC<props> = ({ navigation }) => {
 	};
 
 	return (
-		<Animated.View style={[styles.mainStyle, animatedStyle]}>
+		<Animated.View
+			style={[
+				{
+					flex: 1,
+					backgroundColor: COLORS.white,
+					overflow: "hidden",
+				},
+				animatedStyle,
+			]}
+		>
 			{/* Header */}
 			<Header
 				containerStyle={{
@@ -120,17 +129,76 @@ const MainLayout: FC<props> = ({ navigation }) => {
 			</View>
 
 			{/* Footer */}
+			<View
+				style={{
+					height: 100,
+					justifyContent: "flex-end",
+				}}
+			>
+				{/* Tab */}
+				<Shadow
+					startColor={COLORS.lightGray1}
+					distance={15}
+					sides={["top"]}
+					corners={["topLeft", "topRight"]}
+				>
+					<View
+						style={{
+							flex: 1,
+							flexDirection: "row",
+							paddingHorizontal: SIZES.radius,
+							paddingBottom: 10,
+							borderTopLeftRadius: 20,
+							borderTopRightRadius: 20,
+							backgroundColor: COLORS.white,
+							width: "100%",
+						}}
+					>
+						<TabButton
+							label={constants.screens.home}
+							icon={icons.home}
+							isFocused={selectedTab == constants.screens.home}
+							onPress={() => selectTab(constants.screens.home)}
+						/>
+						<TabButton
+							label={constants.screens.search}
+							icon={icons.search}
+							isFocused={selectedTab == constants.screens.search}
+							onPress={() => selectTab(constants.screens.search)}
+						/>
+						<TabButton
+							label={constants.screens.cart}
+							icon={icons.cart}
+							isFocused={selectedTab == constants.screens.cart}
+							onPress={() => selectTab(constants.screens.cart)}
+						/>
+						<TabButton
+							label={constants.screens.favourite}
+							icon={icons.favourite}
+							isFocused={
+								selectedTab == constants.screens.favourite
+							}
+							onPress={() =>
+								selectTab(constants.screens.favourite)
+							}
+						/>
+						<TabButton
+							label={constants.screens.notification}
+							icon={icons.notification}
+							isFocused={
+								selectedTab == constants.screens.notification
+							}
+							onPress={() =>
+								selectTab(constants.screens.notification)
+							}
+						/>
+					</View>
+				</Shadow>
+			</View>
 		</Animated.View>
 	);
 };
 
 export default MainLayout;
 
-const styles = StyleSheet.create({
-	mainStyle: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: "white",
-	},
-});
+const styles = StyleSheet.create({});
