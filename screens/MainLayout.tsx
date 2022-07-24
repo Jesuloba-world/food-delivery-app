@@ -9,23 +9,10 @@ import {
 } from "react-native";
 import { RouteProp, ParamListBase } from "@react-navigation/native";
 import { useDrawerProgress } from "@react-navigation/drawer";
-import Animated, {
-	Adaptable,
-	useSharedValue,
-	useAnimatedStyle,
-	withTiming,
-} from "react-native-reanimated";
+import Animated, { Adaptable } from "react-native-reanimated";
 import { useAppDispatch, useAppSelector } from "../stores/hook";
 import { setSelectedTab } from "../stores/tab/tabSlice";
-import { CartTab, Favourite, Home, Notification, Search } from "../screens";
-import {
-	COLORS,
-	FONTS,
-	SIZES,
-	constants,
-	dummyData,
-	icons,
-} from "../constants";
+import { COLORS, SIZES, constants, dummyData, icons } from "../constants";
 import { Header, TabButton } from "../components";
 import { Shadow } from "react-native-shadow-2";
 
